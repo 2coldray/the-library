@@ -15,13 +15,15 @@ console.log(theHobbit.info());
 
 // Function that adds user books to an array
 let myLibrary = [];
+let idCounter = 0
 //console.log(myLibrary);
 
 function addBookToLibrary(title, author, pages, read) {
+    idCounter++;
     const myBook = new Book(title, author, pages, read);
+    myBook.id = idCounter;
     console.log(myBook);
     myLibrary.push(myBook);
-    console.log(myLibrary);
 }
 
 //addBookToLibrary('The Cat in the Hat', 'Dr. Seuss', 20, 'read');
@@ -32,33 +34,19 @@ function addBookToLibrary(title, author, pages, read) {
 // Function Add books to Page
 const container = document.querySelector('.container');
 const cards = document.querySelector('.cards');
+let counter = 0;
 
 function addBookToPage() {
-    // loop over the myLibrary array
-    for (let i = 0; i < myLibrary.length; i++) {
-        console.log(myLibrary[i]);
-        // create a div for card, h1 for title, h2 for author, h3 for pages, and p for read
-        const cardDiv = document.createElement('div');
-        const h1 = document.createElement('h1');
-        const h2 = document.createElement('h2');
-        const h3 = document.createElement('h3');
-        const p = document.createElement('p');
-        const btn = document.createElement('button');
-
-        // add the content to h1, h2, h3, p
-        h1.textContent = myLibrary[i].title;
-        h2.textContent = myLibrary[i].author;
-        h3.textContent = myLibrary[i].pages;
-        p.textContent = myLibrary[i].read;
-        btn.textContent = 'Remove';
-
-        // append elements to div
-        cardDiv.append(h1, h2, h3, p, btn);
-
-        // append elements to the page
-        cards.appendChild(cardDiv);
-    }
+    // gather all books
+    const books = document.querySelectorAll('.card');
+    // clear the div
+    books.forEach(book => cards.removeChild(book));
+    // create and display boooks
+    myLibrary.forEach(book =>  {
+        createAndDisplayBook(book);
+    })
 };
+
 
 //addBookToPage();
 
@@ -68,11 +56,13 @@ const submitFormBtn = document.getElementById('sub');
 const formElement = document.querySelector('form');
 const formDiv = document.querySelector('.form-div');
 const closeBtn = document.getElementById('close');
+const removeBtn = document.getElementById('remove');
 
 // event listener calls
 addNewBookBtn.addEventListener('click', displayForm);
 submitFormBtn.addEventListener('click', submitBook);
 closeBtn.addEventListener('click', hideForm);
+
 
 
 // function to display form
@@ -97,9 +87,61 @@ function submitBook(event) {
     const read = document.getElementById('read').value;
     // add book to the array
     addBookToLibrary(bookTitle, bookAuthor, bookPages, read);
+    console.log(myLibrary);
     // clear inputs
     formElement.reset();
     // hide the form after the book has been added
     //hideForm();
+    //addBookToPage();
+    addBookToPage();
 }
 
+// function create book
+function createAndDisplayBook(book) {
+    counter++;
+    //console.log(myLibrary[i]);
+  // create a div for cards and card, h1 for title, h2 for author, h3 for pages, and p for read
+    // const cardDiv = document.createElement('div');
+     // add class to card div
+    // cardDiv.classList.add('cards');
+    // make card to go inside div
+    const card = document.createElement('div');
+    card.classList.add('card');
+    // make status div to go inside card
+    const statusDiv = document.createElement('div');
+    statusDiv.classList.add('status');
+    // remaining elements to create
+    const h1 = document.createElement('h1');
+    const h2 = document.createElement('h2');
+    const h3 = document.createElement('h3');
+    const p = document.createElement('p');
+    const readBtn = document.createElement('button');
+    const removeBtn = document.createElement('button');
+
+    // add the content to h1, h2, h3, p
+    h1.textContent = book.title;
+    h2.textContent = book.author;
+    h3.textContent = book.pages;
+    //p.textContent = myLibrary[i].read;
+    
+    if (myLibrary.read === 'on') {
+        readBtn.textContent = 'Read';
+        readBtn.setAttribute('id', 'toggle');
+    } else {
+        readBtn.textContent = 'Not Read';
+        readBtn.setAttribute('style', 'background-color: orange');
+    }
+
+    removeBtn.textContent = 'Remove';
+    removeBtn.classList.add('goodbye');
+    removeBtn.setAttribute('id', 'remove');
+
+    // Append buttons to div
+    statusDiv.append(readBtn, removeBtn);
+
+    // Append status div, h1 h2 h3  to card
+    card.append(h1, h2, h3, statusDiv);
+
+    // Append card to cards div
+    cards.appendChild(card);
+}

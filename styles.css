@@ -78,7 +78,7 @@ form #close {
     padding: 3px;
 }
 
-.cards .card .status #goodbye {
+.cards .card .status .goodbye {
     background-color: lightcoral;
     padding: 3px;
 }
