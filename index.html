@@ -16,18 +16,22 @@
         <div class="container">
             <button id="add" type="button">Add New Book</button>
             <!-- form -->
-            <form action="#" method="post">
-                <label for="bookTitle">Book Title: </label>
-                <input type="text" name="bookTitle" id="bookTitle">
-                <label for="bookAuthor">Book Author: </label>
-                <input type="text" name="bookAuthor" id="bookAuthor">
-                <label for="bookPages">Number of Pages: </label>
-                <input type="number" name="bookPages" id="bookPages">
-                <label for="read">Have you read it? </label>
-                <input type="checkbox" name="read" id="read">
-                <button id="sub" type="submit">Add Book</button>
-                <button id="close" type="submit">Close Form</button>
-            </form>
+            <div class="form-div">
+                <form action="#" method="post">
+                    <label for="bookTitle">Book Title: </label>
+                    <input type="text" name="bookTitle" id="bookTitle">
+                    <label for="bookAuthor">Book Author: </label>
+                    <input type="text" name="bookAuthor" id="bookAuthor">
+                    <label for="bookPages">Number of Pages: </label>
+                    <input type="number" name="bookPages" id="bookPages">
+                    <div class="check">
+                        <label for="read">Have you read it? </label>
+                        <input type="checkbox" name="read" id="read">
+                    </div>
+                    <button id="sub" type="submit">Add Book</button>
+                    <button id="close" type="submit">Close Form</button>
+                </form>
+            </div>
             <div class="cards"></div>
         </div>
         <script src="script.js" async defer></script>
