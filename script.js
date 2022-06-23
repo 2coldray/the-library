@@ -41,12 +41,22 @@ function addBookToPage() {
     const books = document.querySelectorAll('.card');
     // clear the div
     books.forEach(book => cards.removeChild(book));
-    // create and display boooks
+    // create and display books
     myLibrary.forEach(book =>  {
         createAndDisplayBook(book);
     })
 };
 
+function removeBookFromPage() {
+    console.log('clicked');
+    // const books = document.querySelectorAll('.card');
+    // books.forEach(book => cards.removeChild(book));
+    // const newBooks = Array.from(books);
+    // const filteredList = newBooks.filter(book => book.id !== book.id);
+    // filteredList.forEach(book => {
+    //     createAndDisplayBook(book);
+    // });
+}
 
 //addBookToPage();
 
@@ -56,14 +66,12 @@ const submitFormBtn = document.getElementById('sub');
 const formElement = document.querySelector('form');
 const formDiv = document.querySelector('.form-div');
 const closeBtn = document.getElementById('close');
-const removeBtn = document.getElementById('remove');
+
 
 // event listener calls
 addNewBookBtn.addEventListener('click', displayForm);
 submitFormBtn.addEventListener('click', submitBook);
 closeBtn.addEventListener('click', hideForm);
-
-
 
 // function to display form
 function displayForm() {
@@ -84,7 +92,7 @@ function submitBook(event) {
     const bookTitle = document.getElementById('bookTitle').value;
     const bookAuthor = document.getElementById('bookAuthor').value;
     const bookPages = document.getElementById('bookPages').value;
-    const read = document.getElementById('read').value;
+    const read = document.getElementById('read').checked;
     // add book to the array
     addBookToLibrary(bookTitle, bookAuthor, bookPages, read);
     console.log(myLibrary);
@@ -96,9 +104,10 @@ function submitBook(event) {
     addBookToPage();
 }
 
+let cardCounter = 0;
 // function create book
 function createAndDisplayBook(book) {
-    counter++;
+    cardCounter++;
     //console.log(myLibrary[i]);
   // create a div for cards and card, h1 for title, h2 for author, h3 for pages, and p for read
     // const cardDiv = document.createElement('div');
@@ -107,6 +116,7 @@ function createAndDisplayBook(book) {
     // make card to go inside div
     const card = document.createElement('div');
     card.classList.add('card');
+    card.setAttribute('id', cardCounter);
     // make status div to go inside card
     const statusDiv = document.createElement('div');
     statusDiv.classList.add('status');
@@ -124,7 +134,7 @@ function createAndDisplayBook(book) {
     h3.textContent = book.pages;
     //p.textContent = myLibrary[i].read;
     
-    if (myLibrary.read === 'on') {
+    if (book.read) {
         readBtn.textContent = 'Read';
         readBtn.setAttribute('id', 'toggle');
     } else {
@@ -135,6 +145,10 @@ function createAndDisplayBook(book) {
     removeBtn.textContent = 'Remove';
     removeBtn.classList.add('goodbye');
     removeBtn.setAttribute('id', 'remove');
+    removeBtn.addEventListener('click', () => {
+        console.log('Clicked')
+    })
+  
 
     // Append buttons to div
     statusDiv.append(readBtn, removeBtn);
