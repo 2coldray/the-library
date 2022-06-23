@@ -15,15 +15,18 @@ console.log(theHobbit.info());
 
 // Function that adds user books to an array
 let myLibrary = [];
+//console.log(myLibrary);
 
 function addBookToLibrary(title, author, pages, read) {
     const myBook = new Book(title, author, pages, read);
+    console.log(myBook);
     myLibrary.push(myBook);
+    console.log(myLibrary);
 }
 
 //addBookToLibrary('The Cat in the Hat', 'Dr. Seuss', 20, 'read');
 //addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, 'not read yet');
-console.log(myLibrary);
+
 
 
 // Function Add books to Page
@@ -63,10 +66,13 @@ function addBookToPage() {
 const addNewBookBtn = document.getElementById('add');
 const submitFormBtn = document.getElementById('sub');
 const formElement = document.querySelector('form');
+const closeBtn = document.getElementById('close');
 
 // event listener calls
 addNewBookBtn.addEventListener('click', displayForm);
 submitFormBtn.addEventListener('click', submitBook);
+closeBtn.addEventListener('click', hideForm);
+
 
 // function to display form
 function displayForm() {
@@ -74,7 +80,8 @@ function displayForm() {
 }
 
 // function to hide Form
-function hideForm() {
+function hideForm(event) {
+    event.preventDefault();
     formElement.style.display = 'none';
 }
 
@@ -89,12 +96,9 @@ function submitBook(event) {
     const read = document.getElementById('read').value;
     // add book to the array
     addBookToLibrary(bookTitle, bookAuthor, bookPages, read);
-    // hide the form after the book has been added
-    hideForm();
     // clear inputs
-    bookTitle.value = '';
-    bookAuthor.value = '';
-    bookPages.value = '';
-    read.value = '';
+    formElement.reset();
+    // hide the form after the book has been added
+    //hideForm();
 }
 
