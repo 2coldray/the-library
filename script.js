@@ -66,6 +66,7 @@ function addBookToPage() {
 const addNewBookBtn = document.getElementById('add');
 const submitFormBtn = document.getElementById('sub');
 const formElement = document.querySelector('form');
+const formDiv = document.querySelector('.form-div');
 const closeBtn = document.getElementById('close');
 
 // event listener calls
@@ -76,13 +77,13 @@ closeBtn.addEventListener('click', hideForm);
 
 // function to display form
 function displayForm() {
-    formElement.style.display = 'block';
+    formDiv.style.display = 'block';
 }
 
 // function to hide Form
 function hideForm(event) {
     event.preventDefault();
-    formElement.style.display = 'none';
+    formDiv.style.display = 'none';
 }
 
 // submit book function

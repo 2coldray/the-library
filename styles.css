@@ -52,5 +52,33 @@ form #close {
 }
 
 .form-div {
-    /* display: none; */
+     display: none; 
+     margin-bottom: 15px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cards .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid whitesmoke;
+    background-color: rgb(228, 212, 182);
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.cards .card .status #toggle {
+    background-color: lightgreen;
+    padding: 3px;
+}
+
+.cards .card .status #goodbye {
+    background-color: lightcoral;
+    padding: 3px;
 }
